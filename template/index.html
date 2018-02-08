@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">{{#if_eq category "web-pc"}}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> {{else}}
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"> {{/if_eq}}
+  <title>{{ name }}</title>
+  <script type="text/javascript">
+    //      动态获取配置
+    window.config = {
+      <% for (var item in htmlWebpackPlugin.options.config) { %>
+    <%=item %>: "<%=htmlWebpackPlugin.options.config[item] %>",
+    <% } %>
+    };
+  </script>
+</head>
+<body>
+<div id="{{name}}"></div>
+<!-- built files will be auto injected -->
+</body>
+</html>

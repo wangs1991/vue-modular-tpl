@@ -1,0 +1,81 @@
+html{
+    margin: 0;
+    padding: 0;
+    font-size:50px;
+}
+{{#if_eq category "web-pc"}}
+  html{
+    font-size: 14px;
+  }
+{{else}}
+*{
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+@media screen and (min-width: 540px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width:320px) {
+  html {
+    /*font-size:calc(320px/7.5);*/
+    font-size:4.2666666666666664px;
+  }
+}
+html.iphone{
+  font-size: 7.88888885px;
+}
+{{/if_eq}}
+
+:focus,
+:active{
+  outline: 0;
+}
+::-webkit-input-placeholder {
+  　color:#989898;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  　color:#989898;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  　color:#989898;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  　color:#989898;
+}
+.bb-not{
+  border-bottom: 0!important;
+}
+//==========公用函数=================
+/*兼容的inlineblock*/
+@mixin inblock(){
+    display: -moz-inline-stack;display: inline-block;vertical-align: top;zoom: 1; *display: inline;
+}
+/*超出部分省略号*/
+@mixin els(){
+    white-space:nowrap; text-overflow:ellipsis;  overflow:hidden;
+}
+/*清除浮动*/
+@mixin clear(){
+    *zoom: 1;
+  &:after{content: "";display: table;clear: both;}
+}
+/*css3 属性填充*/
+@mixin experimental($property, $value){
+    -webkit-#{$property} : $value;
+    -khtml-#{$property} : $value;
+    -moz-#{$property} : $value;
+    -ms-#{$property} : $value;
+    -o-#{$property} : $value;
+    #{$property} : $value;
+}
+/*css3 属性填充-value*/
+@mixin experimental-value($property, $value){
+    #{$property} : -webkit-#{$value};
+    #{$property} :  -khtml-#{$value};
+    #{$property} :    -moz-#{$value};
+    #{$property} :     -ms-#{$value};
+    #{$property} :      -o-#{$value};
+    #{$property} :         #{$value};
+}
