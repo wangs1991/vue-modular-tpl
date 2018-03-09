@@ -5,21 +5,17 @@
 </template>
 
 <script>{{#if_eq category "web-pc"}}{{else}}
-  import mobileAdapt from './assets/js/mobileAdapt';
+  import *, {Adapt} from './assets/js/Utils.js';
   {{/if_eq}}
-  {{#if_eq category "webapp" }}
-  //    webapp 配备back返回键监听
-  //   eslint-disable-next-line
-  require('./assets/js/back.js');
-  {{/if_eq}}
+
   export default {
     name: '{{name}}',
     components: { },
     mounted() { {{#if_eq category "web-pc"}}{{else}}
       // eslint-disable-next-line
-      mobileAdapt.init({
-        standard: {{transform}}     // 实际是750，为满足设备快速适配调整成780进行缩放
-      });
+        Adapt.init({
+          standard: {{transform}}     // 实际是750，为满足设备快速适配调整成780进行缩放
+        });
       {{/if_eq}}
     }
   };

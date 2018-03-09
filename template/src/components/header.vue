@@ -25,7 +25,9 @@
 
 <style lang="scss" scoped>
   {{#if_eq category "web-pc"}}
-
+  $header_lh: .73rem;
+  $header_pt: .20rem;
+  $header_fs: .34rem;
   {{else}}
   /*针对移动端写的头部*/
   $header_lh: .73rem;

@@ -21,7 +21,8 @@
 </script>
 
 <style lang="scss">
-  {{#if_eq category "web-pc"}}  {{else}}
+  {{#if_eq category "web-pc"}}
+  $wrapper: 20px;  {{else}}
   /*针对移动端写的头部*/
   $wrapper: .20rem;
   {{/if_eq}}
