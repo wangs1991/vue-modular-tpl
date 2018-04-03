@@ -161,14 +161,14 @@ import toast from '@/components/toast/toast';
       // 设置data-dpr属性，留作的css hack之用
       this.docEl.setAttribute('data-dpr', this.dpr);
       // 分支判断
-      if (this.versions().Quark) { // 夸克浏览器
+      if (this.browser().Quark) { // 夸克浏览器
         this.fontEl.innerHTML = this.Quark();
-      } else if (this.versions().mobile) {  // 普通移动端页面
+      } else if (this.browser().mobile) {  // 普通移动端页面
         this.fontEl.innerHTML = this.Mobile();
       } else {  // pc页面
         this.fontEl.innerHTML = this.PC();
       };
-      if (this.versions().Hbuilder) {  // Hbuilder webApp
+      if (this.browser().Hbuilder) {  // Hbuilder webApp
         this.fontEl.innerHTML = this.Hbuilder();
       };
       // 动态写入样式
@@ -176,7 +176,7 @@ import toast from '@/components/toast/toast';
     }
   };
 
-export Adapt = {
+export const Adapt = {
     init(opts = {
       'standard': 750
     }) {
@@ -218,7 +218,7 @@ export Adapt = {
  * 订阅发布者模式脚本
  *
  */
-export Listener = (function () {
+export const Listener = (function () {
 
   var global = this, Event, _default = 'default';
 

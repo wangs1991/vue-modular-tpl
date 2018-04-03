@@ -1,4 +1,4 @@
-import Hello from './Hello';
+import Home from './Home';
 import Welcome from './Welcome';
 import Document from './Document';
 
@@ -6,7 +6,7 @@ export default {
   routers: [
     {
       path: '/',
-      component: Hello,
+      component: Home,
       children: [
         {
           path: '/',

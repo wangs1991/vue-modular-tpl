@@ -1,15 +1,10 @@
 <template>
-  <div>
-    <comp-header></comp-header>
-    <router-view></router-view>
-    <comp-footer></comp-footer>
-  </div>
+  <layout/>
 </template>
 
 <script type="text/javascript">
   //  公用组件导入
-  import compHeader from '@/components/header';
-  import compFooter from '@/components/footer';
+  import layout from '@/components/layout';
   export default {
     data () {
       return {
@@ -18,8 +13,7 @@
     },
     computed: {},
     components: {
-      compHeader,
-      compFooter
+      layout
     },
     watch: {},
     mounted () {

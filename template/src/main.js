@@ -6,12 +6,14 @@ import "babel-polyfill";
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import Store from './store/index';
 
 Vue.config.productionTip = false;
 
 new Vue({
   el: '#{{name}}',
   router,
+  store: Store,
   components: { App },
   template: '<App/>'
 });

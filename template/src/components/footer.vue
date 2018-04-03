@@ -29,12 +29,7 @@
 </script>
 
 <style lang="scss">
-  {{#if_eq category "web-pc"}}
-
-  {{else}}
-  /*针对移动端写的头部*/
-  $footer_fs: .263rem;
-  {{/if_eq}}
+  $footer-fs: 12px;
   #footer{
     border-top: 1px solid #c4c4c4;
     font-size: $footer_fs;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import toast from '@/components/toast/toast';
-import modal from '@/components/confirm/Modal';
+import APP from '../main';
 
 /* eslint-disable */
 require('es6-promise').polyfill();
@@ -20,11 +20,9 @@ function localData(key, val, del) {
       if (typeof val === 'object') {
         val = JSON.stringify(val);
       }
-      console.log('set', key);
       window.localStorage.setItem(key, val);
       resolve(true, key, val);
     } else if (key && del) {
-      console.log('remove', key);
       window.localStorage.removeItem(key);
       resolve(true);
     } else if (key) {
@@ -37,19 +35,26 @@ function localData(key, val, del) {
       }
     }
   });
-}
+};
 
 // axios 配置
 axios.defaults.timeout = 30000;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+axios.defaults.headers.post['Content-Type'] = 'application/json;';
+axios.defaults.headers['X-Request-With'] = 'XMLHttpRequest';    // ajax请求方式
 axios.defaults.responseType = 'json';
-// axios.defaults.baseURL = 'http://localhost:8099/';
+axios.defaults.proxy = {
+  host: '192.168.3.117',
+  port: 8888
+};
 
+function setToken (token) {
+  axios.defaults.headers.token = token;
+}
 
 //POST传参序列化
 axios.interceptors.request.use((config) => {
   if (config.method === 'post') {
-    config.data = qs.stringify(config.data);
+    // config.data = qs.stringify(config.data);
   }
   return config;
 }, (error) => {
@@ -62,27 +67,27 @@ axios.interceptors.request.use((config) => {
 //返回状态判断
 // 返回状态截获
 axios.interceptors.response.use((res) => {
-  if (res.data.code === 10002){
+  if (res.data.code === 401){
     // 强制退出
     localData('token', '', true);
-    localData('id', '', true);
-    modal({
-      message: '登录过期，请重新登录',
-      confirm: function () {
-        this.close();
-        window.location.href = window.location.href.split('#')[0];
-      },
-      confirmLabel: '重新登录',
-      buttons: 1
+    setToken('');
+    toast({
+      message: '登录过期，请重新登录'
     });
+    // window.location.href = '/';
+    try{
+      APP.$close(false);
+    }catch(e){}
+    APP.$router.push('/login');
     return Promise.reject(res);
-  }else if(res.data.code != 0) {
+  }else if(res.data.code !== 0) {
     toast({
       message: res.data.msg || '网络错误'
     });
-    return Promise.reject(res);
+    return Promise.reject(res.data);
   }
-  return Promise.resolve(res);
+  return Promise.resolve(res.data);
+}, (error) => {
 }, (error) => {
   toast({
     message: '网络错误'
@@ -91,27 +96,24 @@ axios.interceptors.response.use((res) => {
 });
 
 let fetch = (function () {
-  // let reqCache = [];
-
   return function (url, params = {}) {
     if(window.config.host){
       url = window.config.host+url;
     }
-    localData('token').then(data => {
-      params.token = data;
-    }, data => { });
-    localData('id').then(data => {
-      params.id = data;
-    }, data => { });
     return new Promise((resolve, reject) => {
+      params = JSON.stringify(params);
+      APP.$store.commit('loading', true);
       axios.post(url, params)
         .then(response => {
           resolve(response.data);
+          APP.$store.commit('loading', false);
         }, err => {
           reject(err);
+          APP.$store.commit('loading', false);
         })
         .catch((error) => {
           reject(error);
+          APP.$store.commit('loading', false);
         });
     });
   };
@@ -119,5 +121,9 @@ let fetch = (function () {
 
 export default {
   fetch,
+  localData,
+  setToken
+};
+export {
   localData
 };
