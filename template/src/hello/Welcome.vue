@@ -30,10 +30,10 @@
     computed: {},
     methods: {
     },
-    components: {
+    created() {
   {{#if_eq category "web-pc"}} {{else}}
       this.$store.commit('titleBarCtrl', {
-        title: '养老待遇查询',
+        title: '欢迎页',
         back: true,
         show: true,
         hideBg: false
@@ -44,7 +44,6 @@
 </script>
 
 <style lang="scss" scoped>
-  {{#if_eq category "web-pc"}}
   .slogan{
     font-weight: 600;
     font-style: normal;
@@ -63,6 +62,7 @@
     margin-top: 5px;
     color: #8e8e8e;
   }
+  {{#if_eq category "web-pc"}}
   .about-group{
     width: 300px;
     margin: 0 auto;
@@ -103,6 +103,46 @@
       }
     }
   }
-  {{else}} {{/if_eq}}
+  {{else}}
+  .about-group{
+    margin-top: 50px;
+    li{
+      line-height: 1.5em;
+      color: #202020;
+      font-size: .26rem;
+      padding: .25rem .20rem;
+      border-bottom: 1px solid #989898;
+      &:last-child{
+        border: none;
+      }
+      &:before{
+        content: ' ';
+        float: left;
+        margin-right: .5em;
+        font-size: inherit;
+        width: .30rem;
+        height: 1em;
+        background-size: .30rem auto;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+      &.i-company:before{
+        background-image: url('../assets/images/company.png');
+      }
+      &.i-website:before{
+        background-image: url('../assets/images/website.png');
+      }
+      &.i-phone:before{
+        background-image: url('../assets/images/phone.png');
+      }
+      &.i-company:before{
+        background-image: url('../assets/images/company.png');
+      }
+      &.i-fuwu:before{
+        background-image: url('../assets/images/kefu.png');
+      }
+    }
+  }
+  {{/if_eq}}
 
 </style>

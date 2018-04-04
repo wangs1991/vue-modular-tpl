@@ -22,15 +22,14 @@
 
 <style lang="scss">
   {{#if_eq category "web-pc"}}
-  $wrapper: 20px;  {{else}}
-  /*针对移动端写的头部*/
-  $wrapper: .20rem;
+  $font-size: 20px;{{else}}
+  $font-size: .24rem;
   {{/if_eq}}
   .panel-home{
-    font-size: 14px;
+    font-size: $font-size;
   }
   .content-warpper{
     line-height: 2em;
-    padding: $wrapper;
+    padding: 20px;
   }
 </style>

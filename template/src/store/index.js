@@ -8,14 +8,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: { {{#if_eq category "web-pc"}}{{else}}
-    titleBar: '易人社',
+    titleBar: '模板',
     titleBarBack: false,
     titleBarDelete: false,
     titleBackground: true,
     titleShow: true,
-    footerActive: 'home',
-    footerShow: true,
-    authAsk: true,
     isLoading: false {{/if_eq}}
   },
   mutations: { {{#if_eq category "web-pc"}}{{else}}
@@ -27,7 +24,7 @@ export default new Vuex.Store({
     loading (state, flag) {
       state.isLoading = flag;
     },
-    titleBarCtrl (state, opts = {title: '易人社', back: false, show: true, del: false, hideBg: false}) {
+    titleBarCtrl (state, opts = {title: '模板', back: false, show: true, del: false, hideBg: false}) {
       state.titleBar = opts.title;
       state.titleBarBack = opts.back;
       state.titleBarDelete = opts.del;

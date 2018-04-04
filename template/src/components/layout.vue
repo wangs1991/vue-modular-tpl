@@ -17,7 +17,7 @@
   <div class="panel-home">
     <comp-header />
     <transition name="fade">
-      <router-view></router-view>
+      <router-view class="panel-main"></router-view>
     </transition>
     <comp-footer/>
   </div>
@@ -36,18 +36,11 @@
     data() {
       return {};
     },
-    computed: {
-      showAside () {
-//        return this.$store.state.showAside;
-      }
-    },
     components: {
       CompHeader,
       {{#if_eq category "web-pc"}}
       AsideBar, {{else}}
       CompFooter {{/if_eq}}
-    },
-    mounted() {
     }
   };
 </script>
@@ -115,6 +108,17 @@
     }
   }
   {{else}}
-
+  $header_h: .80rem;
+  $footer-h: .80rem;
+  .panel-main {
+    position: absolute;
+    z-index: 1;
+    top: $header_h;
+    bottom: $footer-h;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: #fff;
+  }
   {{/if_eq}}
 </style>

@@ -1,9 +1,11 @@
 <template>
   <transition name="fade">
-    <div class="cover">
-      <div class="loading">
-        <div class="circle circle1"></div>
-        <div class="circle circle2"></div>
+    <div v-show="loading">
+      <div class="cover">
+        <div class="loading">
+          <div class="circle circle1"></div>
+          <div class="circle circle2"></div>
+        </div>
       </div>
     </div>
   </transition>
@@ -15,12 +17,16 @@
     data() {
       return {};
     },
+    computed: {
+      loading () {
+        return this.$store.state.isLoading;
+      }
+    },
   };
 </script>
 
 <style lang="scss" scoped>
   @import '../assets/style/base';
-  @import '../assets/style/public';
 
   @keyframes scale {
     0% {
@@ -52,18 +58,18 @@
       background-color: rgba(0, 0, 0, .1);
       border-radius: 10px;
       display: flex;
-      .circle{
+      .circle {
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        &.circle1{
+        &.circle1 {
           background-color: #0086c9;
           box-shadow: 0 0 2px #0086c9;
           transform-origin: 100% 50%;
           -webkit-animation: scale .5s 0s linear alternate infinite;
           animation: scale .5s 0s linear alternate infinite;
         }
-        &.circle2{
+        &.circle2 {
           background-color: #64d214;
           box-shadow: 0 0 2px #64d214;
           transform-origin: 0 50%;

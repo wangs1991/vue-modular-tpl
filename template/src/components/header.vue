@@ -114,7 +114,7 @@
     <div class="panel-header-l">
       <i class="icon i-back" v-show="showBack" @click="goBack"></i>
     </div>
-    <div class="panel-header-c">默认头部</div>
+    <div class="panel-header-c"> {{ title }} </div>
     <div class="panel-header-r">
       <i class="icon i-delete" v-show="showDelete"></i>
     </div>
@@ -158,8 +158,8 @@
 
 <style lang="scss">
   // 默认头部配置
-  $header_h: 50px;
-  $header_fs: 18px;
+  $header_h: .80rem;
+  $header_fs: .35rem;
   $header_i: 40px;
 
   .panel-header{
@@ -168,7 +168,7 @@
     top: 0;
     left: 0;
     height: $header_h;
-    line-height: $header_h + 12;
+    line-height: $header_h;
     padding: 0 15px;
     background: url('../assets/images/titleBar.jpg') no-repeat;
     background-size: cover;
@@ -201,7 +201,7 @@
       width: 100%;
       text-align: center;
       color: #fff;
-      font-size: 18px;
+      font-size: inherit;
     }
   }
 </style>

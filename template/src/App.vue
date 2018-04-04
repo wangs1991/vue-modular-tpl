@@ -1,5 +1,6 @@
 <template>
   <div id="{{name}}">
+    <loading/>
     <!--<keep-alive>-->
       <router-view/>
     <!--</keep-alive>-->
@@ -9,10 +10,13 @@
 <script>{{#if_eq category "web-pc"}}{{else}}
   import {Adapt} from './assets/js/Utils.js';
   {{/if_eq}}
+    import Loading from '@/components/loading';
 
   export default {
     name: '{{name}}',
-    components: { },
+    components: {
+        Loading
+    },
     mounted() { {{#if_eq category "web-pc"}}{{else}}
       // eslint-disable-next-line
         Adapt.init({
