@@ -1,8 +1,8 @@
-# vue-webpack-boilerplate
+# vue-webpack-modular-template
 
 > A full-featured Webpack setup with hot-reload, lint-on-save, unit testing & css extraction.
 
-> This template is Vue 2.0 compatible. For Vue 1.x use this command: `vue init webpack#1.0 my-project`
+> This template is Vue 2.0 compatible. 
 
 ## Documentation
 
@@ -15,21 +15,11 @@ This is a project template for [vue-cli](https://github.com/vuejs/vue-cli). **It
 
 ``` bash
 $ npm install -g vue-cli
-$ vue init webpack my-project
+$ vue init http://192.168.0.176/eway-fd/vue-template.git my-project
 $ cd my-project
 $ npm install
 $ npm run dev
 ```
-
-This will scaffold the project using the `master` branch. If you wish to use the latest version of the webpack template, do the following instead:
-
-``` bash
-$ vue init webpack#develop my-project
-```
-
-:warning: **The develop branch is not considered stable and can contain bugs or not build at all, so use at your own risk.**
-
-The development server will run on port 8080 by default. If that port is already in use on your machine, the next free port will be used.
 
 ## What's Included
 
@@ -57,10 +47,43 @@ The development server will run on port 8080 by default. If that port is already
     - Selenium and chromedriver dependencies automatically handled.
     - Automatically spawns the Selenium server.
 
-### Fork It And Make Your Own
-
-You can fork this repo to create your own boilerplate, and use it with `vue-cli`:
-
-``` bash
-vue init username/repo my-project
-```
+## What's Added
+- 多类型项目可选生成
+    - pc 网站应用
+    - m站应用
+    - webApp 应用
+- 多环境配置动态注入
+    > 开发、生产环境动态注入作用于环境
+- 文件夹模块管理
+    > 用文件夹管理功能模块，统一入口格式。再由 `switch/index.js` 引用全部模块，在 `config/index.js` 中配置modules选择不同环境下可用模块。
+- 公用布局组件
+    > `components/layout.vue` 定义了移动端项目和pc管理平台的常用布局。
+- 常用布局主题内置
+    > pc主题是左菜单宽度固定右内容宽度自适应布局；
+    > 移动端主题是公用顶部、底部、中间内容；
+- 工具方法
+    - webapp 自动添加返回上级逻辑处理；
+    - 移动端项目自动添加rem样式以及高清适配处理脚本；
+    - 添加订阅发布者模式，可以用vue msgBus代替；
+    - debounce 控线控制方法；
+    - throttle 频率控制方法；
+- 通用问题填坑
+    - webpack打包静态图片引用错误；
+    - 页面引入
+    - 页面访问权限控制逻辑；
+    - axious ajax请求header参数确实会和后台联调参数获取问题；【todo】
+- 端口动态配置
+    > 创建项目时可以手动填入port端口号，省去运行报错端口占用再去修改配置文件的操作；
+- 常用组件内置
+    - 移动端header组件，通过store改变现实文本和按钮操作；
+    - 移动端footer组件；
+    - 全局Loading组件，通过网络接口统一出入口控制状态；
+    - toast 消息提示；
+    - layout 布局组件；
+ 
+- 统一网络请求优化
+    - 统一处理网络出口；
+    - 在网络出口控制loading状态；
+    - 公用参数如token等参数的添加实例；
+    - 处理防止重复表单提交判断；【todo】
+    

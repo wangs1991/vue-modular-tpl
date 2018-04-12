@@ -42,10 +42,6 @@ axios.defaults.timeout = 30000;
 axios.defaults.headers.post['Content-Type'] = 'application/json;';
 axios.defaults.headers['X-Request-With'] = 'XMLHttpRequest';    // ajax请求方式
 axios.defaults.responseType = 'json';
-axios.defaults.proxy = {
-  host: '192.168.3.117',
-  port: 8888
-};
 
 function setToken (token) {
   axios.defaults.headers.token = token;
